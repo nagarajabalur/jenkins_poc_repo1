@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    try {
         stages {
             stage("init") {
                 steps {
@@ -12,8 +11,12 @@ pipeline {
             stage("build") {
                 steps {
                     script {
-                        echo "building the app"
-                        sh "./script.sh"
+                        try {
+                            echo "building the app"
+                            sh "./script.sh"
+                        } catch (Exception e) {
+                            echo 'Error : ' + e.toString()
+                        }
                     }
                 }
             }
@@ -32,8 +35,4 @@ pipeline {
                 }
             }
         }
-    }
-    catch(err) {
-        echo "ERROR: ${err}"
-    }
 }

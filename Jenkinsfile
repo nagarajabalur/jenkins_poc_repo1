@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
     try {
         stages {
             stage("init") {
@@ -33,7 +32,8 @@ pipeline {
                 }
             }
         }
-    } catch (err) {
-        echo "Error: ${err}"
+    }
+    catch(err) {
+        echo "ERROR: ${err}"
     }
 }
